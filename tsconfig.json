@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		"outDir": "dist",
+		"rootDir": "src",
+		"types": [
+			"node"
+		],
+		"paths": {
+			"@/*": [
+				"./src/app/*"
+			],
+			"#/*": [
+				"./src/contexts/*"
+			]
+		}
+	},
+	"exclude": [
+		"drizzle.config.ts"
+	]
+}
