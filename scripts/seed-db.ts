@@ -31,8 +31,24 @@ await Promise.all(
 	),
 )
 
+
+const dbUsers = await drizzleClient.select().from(authSchema.users)
+
+const tweetsWithUserId = tweets.map((tweet) => {
+	const user = dbUsers.find((u) => u.email === tweet.userEmail)
+	if (!user) throw new Error(`User not found for email ${tweet.userEmail}`)
+	return {
+		content: tweet.content,
+		likes: tweet.likes,
+		userId: user.id,
+	}
+})
+
 console.log('Seeding initial tweets...')
-await drizzleClient.insert(tweetsTable).values(tweets)
+await drizzleClient.insert(tweetsTable).values(tweetsWithUserId)
+
+
+
 
 console.log('Seed completed successfully!')
 process.exit(0)
