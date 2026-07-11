@@ -1,0 +1,10 @@
+type Tweet {
+	id: ID!
+	content: String!
+	likes: Int!
+	createdAt: DateTimeISO!
+}
+
+extend type Query {
+	tweets: [Tweet!]!
+}
